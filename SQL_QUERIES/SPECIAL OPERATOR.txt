@@ -1,0 +1,197 @@
+************************************************************   SPECIAL OPERATOR   ***************************************************************************************
+
+NOTE: SPECIAL OPERATORS (IN, NOT IN, BETWEEN, NOT BETWEEN, IS, IS NOT, LIKE, NOT LIKE)
+======
+________________________________________________________________________________________________________________________________________________________________________
+
+1) IN OPERATOR:    i) It is a multivalue operator; it can accept one value at LHS and multiple values at RHS.
+===============    ii) We can use the IN operator instead of using the equal operator.
+
+   Syntax: COLUMN_NAME/EXPRESSION IN (V1, V2, V3, ..., VN);
+   -------
+
+   NOTE:
+   ======
+   i) The IN operator is typically used when you need to check for multiple values.
+   ii) Here we used IN for a single value just for practice. For a single value, priority is given to the equal operator (=).
+   iii) If you are using the IN operator for a single value, then it is not mandatory to use parentheses.
+
+2) NOT IN:   i) Similar to the IN operator, but instead of the selected value, it will be rejected.
+=========== 
+
+   Syntax: COLUMN_NAME/EXPRESSION NOT IN (V1, V2, V3, ..., VN);
+   -------
+
+3) BETWEEN OPERATOR:   i) It is used to have a range of values.
+====================   ii) The range is between the lower range and the higher range. (For output, it includes the values of both the lower range and the higher range.)
+
+   Syntax: COLUMN_NAME/EXPRESSION BETWEEN LOWER_RANGE AND HIGHER_RANGE;
+   -------
+
+4) NOT BETWEEN OPERATOR:     i) It is similar to the BETWEEN operator, but instead of the selected value, it will be rejected.
+=======================
+
+   Syntax: COLUMN_NAME/EXPRESSION NOT BETWEEN LOWER_RANGE AND HIGHER_RANGE;
+   -------
+
+5) IS OPERATOR:    i) The IS operator is used to compare with NULL values.
+===============
+
+   Syntax: COLUMN_NAME/EXPRESSION IS NULL;
+   -------
+
+6) IS NOT OPERATOR:    i) The IS NOT operator is similar to the IS operator, but instead of the selected value, it will be rejected.
+==================
+
+   Syntax: COLUMN_NAME/EXPRESSION IS NOT NULL;
+   -------
+
+7) LIKE OPERATOR:   i) The LIKE operator is used whenever we need pattern matching.
+=================   ii) To achieve pattern matching, we need two special characters:
+     			 a) Percentile (%) – used when we don’t know the number of characters.
+    			 b) Underscore (_) – used when we know the number of characters.
+
+   Syntax: COLUMN_NAME/EXPRESSION LIKE 'PATTERN-TO-MATCH';
+   -------
+
+8) NOT LIKE OPERATOR:   i) The NOT LIKE operator is the opposite of the LIKE operator. Instead of the selected value, it will be rejected.
+====================
+
+   Syntax: COLUMN_NAME/EXPRESSION NOT LIKE 'PATTERN-TO-MATCH';
+   -------
+
+______________________________________________________________________________________________________________________________________________________________________________
+
+
+*********************************************************   SPECIAL OPERATOR QUERIES   ****************************************************************************************
+
+Q1) LIST ALL THE EMPLOYEES WHOSE COMMISSION IS NULL.
+--->
+SELECT *
+FROM EMP
+WHERE COMM IS NULL;
+
+Q2) LIST ALL THE EMPLOYEES WHO DON’T HAVE A REPORTING MANAGER.
+--->
+SELECT *
+FROM EMP
+WHERE MGR IS NULL;
+
+Q3) LIST ALL THE SALESMAN IN DEPT 30.
+--->
+SELECT *
+FROM EMP
+WHERE JOB IN (’SALESMAN’) AND DEPTNO IN 30;
+	OR 
+SELECT *: LIKE OPARATOR : i)
+FROM EMP
+WHERE JOB =’SALESMAN’ AND DEPTNO=30;
+
+Q4) LIST ALL THE SALESMAN IN DEPT NUMBER 30 AND HAVING SALARY GREATER THAN 1500.
+--->
+SELECT *
+FROM EMP
+WHERE JOB IN (‘SALESMAN’) AND DEPTNO = 30 AND SAL>1500;
+
+Q5) LIST ALL THE EMPLOYEES WHOSE NAME START WITH ‘S’ OR ‘A’
+--->
+SELECT *
+FROM EMP
+WHERE ENAME LIKE ‘S%’ OR ENAME LIKE ‘A%’;
+
+Q6) LIST ALL THE EMPLOYEES EXCEPT THOSE WHO ARE WORKING IN DEPT 10 & 20.
+--->
+SELECT *
+FROM EMP
+WHERE DEPTNO NOT IN (10,20);
+
+Q7) LIST THE EMPLOYEES WHOSE NAME DOES NOT START WITH ‘S’.
+--->
+SELECT *
+FROM EMP
+WHERE ENAME NOT LIKE ‘S%’;
+
+Q8) LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGER IN DEPT 10.
+--->
+SELECT *
+FROM EMP
+WHERE MGR IS NOT NULL AND DEPTNO IN 10;
+
+Q9) LIST ALL THE EMPLOYEES WHOSE COMMISION IS NULL AND WORKING AS CLERK.
+--->
+SELECT *
+FROM EMP
+WHERE COMM IS NULL AND JOB IN (’CLERK’);
+
+Q10) LIST ALL THE EMPLOYEES WHO DON’T HAVE A REPORTING MANAGER IN DEPTNO 10 OR 30.
+--->
+SELECT *
+FROM EMP
+WHERE MGR IS NULL AND DEPTNO IN (10,30);
+
+Q11) LIST ALL THE SALESMAN IN DEPT 30 WITH SAL MORE THAN 2450.
+--->
+SELECT *
+FROM EMP
+WHERE JOB IN (’SALESMAN’) AND DEPTNO IN 30 AND SAL>2450;
+	OR
+SELECT *
+FROM EMP
+WHERE JOB =’SALESMAN’ AND DEPTNO=30 AND SAL>2450;
+
+Q12) LIST ALL THE ANALYST IN DEPT NUMBER 20 AND HAVING A SALARY GREATER THAN 2500.
+--->
+SELECT *
+FROM EMP
+WHERE JOB IN (‘ANALYST’) AND DEPTNO =20 AND SAL>2500;
+
+Q13) LIST ALL THE EMPLOYEES WHOSE NAME STARTS WITH ‘M’ OR ‘J’.
+--->
+SELECT *
+FROM EMP
+WHERE ENAME LIKE ‘M%’ OR ENAME LIKE ‘J%’;
+
+Q14) LIST ALL THE EMPLOYEES WITH ANNUAL SALARY EXCEPT THOSE WHO ARE WORKING IN DEPT 30.
+--->
+SELECT EMP.*, SAL*12 AS ANNUALSAL
+FROM EMP
+WHERE DEPTNO NOT IN 30;
+
+Q15) LIST THE EMPLOYEES WHOSE NAME DOES NOT END WITH ‘ES’ OR ‘R’.
+--->
+SELECT *
+FROM EMP
+WHERE ENAME NOT LIKE ‘%ES’ AND ENAME NOT LIKE ‘%R’;
+
+Q16) LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGERS IN DEPT 10 ALONG WITH 10% HIKE IN SALARY.
+--->
+SELECT EMP.*, SAL+((SAL/100)*10)
+FROM EMP
+WHERE MGR IS NOT NULL AND DEPTNO=10;
+
+Q17) DISPLAY ALL THE EMPLOYEES WHO ARE SALESMAN’S HAVING ‘E’ AS THE LAST BUT ONE CHARACTER IN ENAME BUT SALARY HAVING EXACTLY 4 CHARACTER.
+--->
+SELECT *
+FROM EMP
+WHERE JOB IN (‘SALESMAN’) AND ENAME LIKE ‘%E_’ AND SAL LIKE ‘____’;
+
+Q18) DISPLAY ALL THE MPLOYEES WHO ARE JOINED AFTER YEAR 81.
+--->
+SELECT *
+FROM EMP
+WHERE HIREDATE >’31-DEC-81’;
+
+Q19) DISPLAY ALL THE EMPLOYEES WHO ARE JOINED IN FEB.
+--->
+SELECT *
+FROM EMP
+WHERE HIREDATE LIKE ‘%FEB%’;
+
+Q20) LIST THE EMPLOYEES WHO ARE NOT WORKING AS MANAGERS AND CLERKS IN DEPT 10 AND 20 WITH A SALARY IN THE RANGE OF 1000 TO 3000.
+--->
+SELECT *
+FROM EMP
+WHERE JOB NOT IN (‘MANAGER’, ‘CLERK’) AND DEPTNO IN (10,20) 
+AND SAL BETWEEN 1000 AND 3000;
+
+
