@@ -1,0 +1,165 @@
+
+************************************************************** MULTI-ROW FUNCTION (MRF)  ********************************************************************
+-if we give one input to the multi-row function finally, we will get single output.
+-If we give multiple input to the multi-row function we will get single output.
+	NUMBER OF INPUT =SINGLE OUTPUT
+
+***** LIST OF MRF (MAX (), MIN (), SUM (), AVG (), COUNT ()) *******
+
+1) MAX (): It is used to obtain maximum value present in the column.
+========
+
+2) MIN():  It is used to obtain minimum value present in the column.
+==========
+
+3)SUM():   It is used to obtain sum of values present in the column.
+=========
+
+4) AVG() : It is used to obtain average of the values present in the column. 
+========
+
+5)COUNT() :It is used to obtain total number of values present in the column.
+==========
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NOTE:
+=======
+1)MRF cannot accept NULL values.
+2)In select clause we cannot use any other column name along with MRF.
+3)We can use more than one MRF inside the select clause.
+4)In where clause we cannot use MRF.
+5)COUNT Is the only MRF which can accept * as an Argument.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Important: 
+==========
+DISTINCT CLAUSE : It is used to remove the duplicated or repeated values from the result table.
+================
+
+_______________________________________________________________________________________________________________________________________________________________
+
+
+Q1) WAQTD NUMBER OF EMPLOYEES GETTING SALARY LESS THAN 2000 IN DEPT NO 10.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE SAL<2000 AND DEPTNO=10;
+
+Q2) WAQTD TOTAL SALARY NEEDED TO PAY EMPLOYEES WORKING AS CLERK.
+--->
+SELECT SUM(SAL)
+FROM EMP
+WHERE JOB ='CLERK';
+
+Q3) WAQTD AVERAGE SALARY NEEDED TO PAY ALL EMPLOYEES.
+--->
+SELECT AVG(SAL)
+FROM EMP;
+
+Q4) WAQTD NUMBER OF EMPLOYEES HAVING 'A' AS THEIR FIRST CHARACTER
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE ENAME LIKE 'A%' ;
+
+Q5) WAQTD NUMBER OF EMPLOYEES WORKING AS CLERK OR MANAGER.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE JOB='CLERK' OR JOB='MANAGER';
+	OR
+SELECT COUNT(*)
+FROM EMP
+WHERE JOB IN ('CLERK','MANAGER');
+
+Q6) WAQTD TOTAL SALARY NEEDED TO PAY EMPLOYEES HIRED IN FEB.
+--->
+SELECT SUM(SAL)
+WHERE HIREDATE LIKE '%FEB%';
+
+Q7) WAQTD NUMBER OF EMPLOYEES REPORTING TO 7839(MGR).
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE MGR=7839;
+
+Q8) WAQTD NUMBER OF EMPLOYEES GETTING COMMISSION IN DEPT 30.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE COMM IS NOT NULL AND DEPTNO=30;
+
+Q9) WAQTD AVG SAL, TOTAL SAL, NUMBER OF EMPS AND MAXIMUM SALARY GIVEN TO EMPLOYEES WORKING AS PRESIDENT.
+--->
+SELECT AVG(SAL), SUM(SAL), COUNT(*), MAX(SAL)
+FROM EMP
+WHERE JOB='PRESIDENT';
+
+Q10) WAQTD NUMBER OF EMPLOYEES HAVING 'A' IN THEIR NAMES.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE ENAME LIKE '%A%';
+
+Q11) WAQTD NUMBER OF EMPS AND TOTAL SALARY NEEDED TO PAY THE EMPLOYEES WHO HAVE 2 CONSICUTIVE L'S IN THEIR NAMES.
+--->
+SELECT COUNT(*), SUM(SAL)
+FROM EMP
+WHERE ENAME LIKE '%LL%';
+
+Q12) WAQTD NUMBER OF DEPARTMENTS PRESENT IN EMPLOYEE TABLE.
+--->
+SELECT COUNT(DISTINCT DEPTNO)
+FROM EMP;
+
+Q13) WAQTD NUMBER OF EMPLOYEES HAVING CHARACTER 'Z' IN THEIR NAME.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE ENAME LIKE '%Z%';
+
+Q14) WAQTD NUMBER OF EMPLOYEES HAVING '$' IN THEIR NAMES;
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE ENAME LIKE '%$%';
+
+Q15) WAQTD TOTAL SALARY GIVEN TO EMPLOYEES WORKING AS CLERK IN DEPT 30.
+--->
+SELECT SUM(SAL)
+FROM EMP
+WHERE JOB='CLERK' AND DEPTNO=30;
+
+Q16) WAQTD MAXIMUM SALARY GIVEN TO THE EMPLOYEES WORKING AS ANALYST.
+--->
+SELECT MAX(SAL)
+FROM EMP
+WHERE JOB='ANALYST';
+
+Q17)WAQTD NUMBER OF DISTINCT SALARIES PRESENT IN EMPLOYEE TABLE.
+--->
+SELECT COUNT(DISTINCT SAL)
+FROM EMP;
+
+Q18) WAQTD NUMBER OF JOB PRESENT IN EMPLOYEE TABLE.
+--->
+SELECT COUNT(DISTINCT JOB)
+FROM EMP;
+
+Q19) WAQTD AVG SALARY GIVEN TO THE CLERKS.
+--->
+SELECT AVG(SAL)
+FROM EMP
+WHERE JOB='CLERK';
+
+Q20)WAQTD MINIMUM SALARY GIVEN TO THE EMPLOYEES WHO WORK IN DEPT 10 AS MANAGER OR A CLERK.
+--->
+SELECT MIN(SAL)
+FROM EMP
+WHERE DEPTNO=10 AND JOB IN ('MANAGER','CLERK');
+
+
+
+
+
