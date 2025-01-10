@@ -1,0 +1,102 @@
+***************************************************************** GROUP BY CLAUSE ************************************************************************
+It is used to group the records.
+
+Syntax:
+========
+SELECT GROUP_FUNCTION / GROUP_BY_EXPRESSION
+FROM TABLE_NAME
+[WHERE <FILTER_CONDITION>]
+GROUP BY COLUMN_NAME / EXPRESSION;
+
+Note: The WHERE clause is optional.
+======
+
+ORDER OF EXECUTION
+=======================
+1. FROM
+   ↓
+2. [WHERE (ROW-BY-ROW)]
+   ↓
+3. GROUP BY (ROW-BY-ROW)
+   ↓
+4. SELECT (GROUP-BY-GROUP)
+
+NOTES:
+=====
+1. The GROUP BY clause executes after the execution of the FROM clause.
+2. The GROUP BY clause processes row-by-row.
+3. The GROUP BY clause is used to group the records.
+4. After the execution of the GROUP BY clause, we will get groups.
+5. Any clause executed after the execution of the GROUP BY clause will process group-by-group.
+__________________________________________________________________________________________________________________________________________________________
+
+
+************************************************* ASSIGNMENT QUESTIONS ON THE GROUP BY CLAUSE *************************************************************
+
+
+Q1) WAQTD NUMBER OF EMPLOYEES WORKING IN EACH DEPARTMENT EXCEPT PRESIDENT.
+--->
+SELECT COUNT(*), DEPTNO
+FROM EMP
+WHERE JOB !='PRESIDENT'
+GROUP BY DEPTNO;
+
+Q2) WAQTD TOTAL SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH JOB.
+--->
+SELECT SUM(SAL), JOB
+FROM EMP
+GROUP BY JOB;
+
+Q3) WAQTD NUMBER OF EMPLOYEES WORKING AS MANAGER IN EACH DEPARTMENT.
+--->
+SELECT COUNT(*), DEPTNO
+FROM EMP
+WHERE JOB='MANAGER'
+GROUP BY DEPTNO;
+
+Q4) WAQTD AVG SALARY NEEDED TO PAY ALL THE EMPLOYEES IN EACH DEPARTMENT EXCLUDING THE EMPLOYEES OF DEPTNO 20.
+--->
+SELECT AVG(SAL), DEPTNO
+FROM EMP
+WHERE DEPTNO!=20
+GROUP BY DEPTNO;
+
+Q5) WAQTD NUMBER OF EMPLOYEES HAVING CHARACTER 'A' IN THEIR NAMES IN EACH JOB.
+--->
+SELECT COUNT(*), JOB
+FROM EMP
+WHERE ENAME LIKE '%A%'
+GROUP BY JOB;
+
+Q6) WAQTD NUMBER OF EMPLOYEES AND AVG SALARY NEEDED TO PAY THE EMPLOYEES WHOSE SALARY IS GREATER THAN 2000 IN EACH DEPT.
+--->
+SELECT COUNT(*),AVG(SAL),DEPTNO
+FROM EMP
+WHERE SAL>2000
+GROUP BY DEPTNO;
+
+Q7) WAQTD TOTAL SALARY NEEDED TO PAY AND NUMBER OF SALESMANS IN EACH DEPT.
+--->
+SELECT SUM(SAL),COUNT(JOB), DEPTNO
+FROM EMP
+WHERE JOB='SALESMAN'
+GROUP BY DEPTNO;
+
+Q8) WAQTD NUMBER OF EMPLOYEES WITH THEIR MAXIMUM SALARIES IN EACH JOB.
+--->
+SELECT COUNT(*), MAX(SAL),JOB
+FROM EMP
+GROUP BY JOB;
+
+Q9) WAQTD MAXIMUM SALARIES GIVEN TO AN EMPLOYEE WORKING IN EACH DEPT.
+--->
+SELECT MAX(SAL), DEPTNO
+FROM EMP
+GROUP BY DEPTNO;
+
+Q10) WAQTD NUMBER OF TIMES THE SALARIES PRESENT IN EMPLOYEE TABLE.
+--->
+SELECT COUNT(*),SAL
+FROM EMP
+GROUP BY SAL;
+
