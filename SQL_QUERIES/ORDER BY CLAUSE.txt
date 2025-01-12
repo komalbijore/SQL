@@ -1,0 +1,66 @@
+******************************************************************* ORDER BY CLAUSE *************************************************************************
+1) It is used to arrange the records in ascending or descending order.
+2) By default, the compiler will arrange the records in ascending order.
+3) If we want to arrange the records in descending order, we should use the keyword DESC.
+
+Syntax:
+=======
+SELECT GROUP_FUNCTION / GROUP_BY_EXPRESSION
+FROM TABLE_NAME
+[WHERE <FILTER_CONDITION>]
+[GROUP BY COLUMN_NAME / EXPRESSION]
+[HAVING <GROUP_FILTER_CONDITION>]
+ORDER BY COLUMN_NAME;
+
+Note: WHERE, GROUP BY, HAVING clauses are optional.
+=====
+
+ORDER OF EXECUTION:
+===================
+FROM
+↓
+WHERE
+↓
+GROUP BY
+↓
+HAVING
+↓
+SELECT
+↓
+ORDER BY
+
+________________________________________________________________________________________________________________________________________________________________
+
+
+Q1) WAQTD NAMES OF THE EMPLOYEE IN ASCENDING ORDER.
+--->
+SELECT ENAME
+FROM EMP
+ORDER BY ENAME;
+
+Q2) WAQTD SALARY OF THE EMPLOYEE IN ASCENDING ORDER.
+--->
+SELECT SAL
+FROM EMP
+ORDER BY SAL;
+
+Q3) WAQTD NAMES OF THE EMPLOYEE IN DESCENDING ORDER.
+--->
+SELECT ENAME
+FROM EMP
+ORDER BY ENAME DESC;
+
+Q4) WAQTD SALARY OF THE EMPLOYEE IN DESCENDING ORDER.
+--->
+SELECT SAL
+FROM EMP
+ORDER BY SAL DESC;
+
+5) WAQTD EMPLOYEE NAME, SALARY OF THE EMPLOYEES WHO ARE WORKING AS SALESMAN OR MANAGER AND THE RECORDS SHOULD BE DISPLAY IN DESCENDING ORDER BASED ON SALARY COLUMN.
+--->
+SELECT ENAME, SAL
+FROM EMP
+WHERE JOB IN ('SALESMAN','MANAGER')
+ORDER BY SAL DESC;
+
+
