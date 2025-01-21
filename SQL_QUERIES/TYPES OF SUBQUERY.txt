@@ -1,0 +1,119 @@
+******************************************* TYPES OF SUBQUERY ************************
+
+1) SINGLE ROW SUBQUERY
+2) MULTI ROW SUBQUERY
+
+1) SINGLE ROW SUBQUERY
+- If a subquery returns exactly one value, we call it a Single Row Subquery.
+- If a subquery returns exactly one value, we can use either the equal to operator (=) or the IN operator to compare the values.
+
+2) MULTI ROW SUBQUERY
+- If a subquery returns more than one value, we call it a Multi Row Subquery.
+- If a subquery returns more than one value, we can use the IN operator to compare the values.
+
+NOTE:
+======
+It is difficult to identify whether the subquery returns a single row or multiple rows, so instead of using the equal to operator, we should use the IN operator.
+
+SUBQUERY OPERATOR
+=======================
+1)ALL
+2)ANY
+
+1) ALL OPERATOR
+- ALL operator is a special operator; it returns true if all the records satisfy the condition.
+- ALL operator is used along with relational operators.
+
+2) ANY OPERATOR
+- ANY operator is a special operator; it returns true if any one condition is satisfied.
+- ANY operator is used along with relational operators.
+
+
+********************** ASSIGNMENT ON TYPES OF SUBQUERY ********************************
+
+Q51) WAQTD NAME OF THE EMPLOYEES EARNING SALARY MORE THAN THE SALESMAN.
+--->
+SELECT ENAME
+FROM EMP
+WHERE SAL > ALL(SELECT SAL
+                FROM EMP
+                WHERE JOB='SALESMAN');
+
+Q52) WAQTD DETAILS OF THE EMPLOYEES HIRED AFTER ALL THE CLERKS.
+--->
+SELECT *
+FROM EMP
+WHERE HIREDATE > ALL(SELECT HIREDATE
+                     FROM EMP
+                     WHERE JOB='CLERK');
+
+Q53) WAQTD NAME AND SALARY FOR ALL THE EMPLOYEES IF THEY ARE EARNING LESS THAN ATLEAST A MANAGER.
+--->
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL < ANY (SELECT SAL
+                 FROM EMP
+                 WHERE JOB='MANAGER');
+
+Q54) WAQTD NAME AND HIREDATE OF EMPLOYEES HIRED BEFORE ALL THE MANAGERS.
+--->
+SELECT ENAME, HIREDATE
+FROM EMP
+WHERE HIREDATE < ALL (SELECT HIREDATE 
+                      FROM EMP
+                      WHERE JOB='MANAGER');
+
+Q55) WAQTD NAMES OF THE EMPLOYEES HIRED AFTER ALL THE MANAGERS AND EARNING SALARY MORE THAN ALL TH CLERKS.
+--->
+SELECT ENAME
+FROM EMP
+WHERE HIREDATE > ALL(SELECT HIREDATE
+                     FROM EMP
+                     WHERE JOB='MANAGER')
+       AND SAL > ALL (SELECT SAL
+                      FROM EMP
+                      WHERE JOB='CLERK');
+
+Q56) WAQTD DETAILS OF THE EMPLOYEES WORKING AS CLERK AND HIRED BEFORE ATLEAST A SALESMAN.
+--->
+SELECT *
+FROM EMP
+WHERE JOB='CLERK'
+ AND HIREDATE < ANY (SELECT HIREDATE 
+                     FROM EMP
+                     WHERE JOB='SALESMAN');
+
+Q57) WAQTD DETAILS OF THE EMPLOYEES WORKING IN ACCOUNTING OR SALES DEPT
+--->
+SELECT *
+FROM EMP
+WHERE DEPTNO = ANY(SELECT DEPTNO
+                   FROM DEPT
+                   WHERE DNAME IN ('ACCOUNTING','SALES'));
+
+Q58) WAQTD DEPARTMENT NAMES OF THE EMPLOYEES WITH NAME SMITH, KING, AND MILLER.
+--->
+SELECT DNAME
+FROM DEPT
+WHERE DEPTNO = ANY(SELECT DEPTNO
+                  FROM EMP
+                  WHERE ENAME IN ('SMITH','KING','MILLER'));
+
+Q59) WAQTD DETAILS OF THE EMPLOYEES WORKING IN NEW YORK OR CHICAGO.
+--->
+SELECT *
+FROM EMP
+WHERE DEPTNO= ANY(SELECT DEPTNO
+                  FROM DEPT
+                  WHERE LOC IN ('NEW YORK', 'CHICAGO'));
+
+Q60) WAQTD EMP NAMES IF EMPLOYEES ARE HIRED AFTER ALL THE EMPLOYEES OF DEPT 10.
+--->
+SELECT ENAME
+FROM EMP
+WHERE HIREDATE > ALL (SELECT HIREDATE
+                      FROM EMP
+                      WHERE DEPTNO=10);
+               
+                
+
