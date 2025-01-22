@@ -1,0 +1,109 @@
+
+****************************************************** ASSIGNMENT ON EMP AND MANAGER RELATION *************************************************************
+
+Q71) WAQTD SMITH'S REPORTING MANAGER'S NAME.
+--->
+SELECT *
+FROM EMP
+WHERE EMPNO = (SELECT MGR
+               FROM EMP
+               WHERE ENAME= 'SMITH'
+               );
+
+Q72) WAQTD ADAMS MANAGER'S MANAGER NAME.
+--->
+SELECT ENAME
+FROM EMP
+WHERE EMPNO = ( SELECT MGR
+                 FROM EMP
+                 WHERE EMPNO = (SELECT MGR
+                                FROM EMP
+                                WHERE ENAME='ADAMS'
+                               )
+                );
+
+Q73) WAQTD DNAME OF JONES MANAGER.
+--->
+SELECT DNAME
+FROM DEPT
+WHERE DEPTNO = (SELECT DEPTNO
+                 FROM EMP
+                 WHERE EMPNO = (SELECT MGR
+                                 FROM EMP
+                                 WHERE ENAME='JONES'
+                               )
+                );
+
+Q74) WAQTD MILLER'S MANAGER'S SALARY.
+--->
+SELECT SAL
+FROM EMP
+WHERE EMPNO = (SELECT MGR 
+               FROM EMP
+               WHERE EMPNO = (SELECT MGR
+                              FROM EMP
+                              WHERE ENAME='MILLER'
+                             )
+               );
+
+Q75) WAQTD LOC OF SMITH'S MANAGERS'S MANAGER.
+--->
+SELECT LOC
+FROM DEPT
+WHERE DEPTNO = (SELECT DEPTNO
+                FROM EMP
+                WHERE EMPNO = (SELECT MGR
+                               FROM EMP
+                               WHERE EMPNO = (SELECT MGR
+                                              FROM EMP
+                                              WHERE ENAME='SMITH'
+                                              )
+                                )
+                );
+
+Q76) WAQTD NAME OF THE EMPLOYEES REPORTING TO BLAKE.
+--->
+SELECT ENAME
+FROM EMP
+WHERE MGR = (SELECT EMPNO
+             FROM EMP
+             WHERE ENAME='BLAKE'
+             );
+
+Q77) WAQTD NUMBER OF EMPLOYEE REPORTING TO KING.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE MGR = (SELECT EMPNO
+             FROM EMP
+             WHERE ENAME='KING'
+             );
+
+Q78) WAQTD DETAILS OF THE EMPLOYEES REPORTING TO JONES.
+--->
+SELECT *
+FROM EMP
+WHERE MGR = (SELECT EMPNO
+             FROM EMP
+             WHERE ENAME='JONES'
+             );
+
+Q79) WAQTD ENAMES OF THE EMPLOYEES REPORTING TO BLAKES'S MANAGER.
+--->
+SELECT ENAME
+FROM EMP
+WHERE MGR = (SELECT MGR
+             FROM EMP
+             WHERE ENAME='BLAKE'
+             );
+
+Q80) WAQTD NUMBER OF EMPLOYEES REPORTING TO FORD'S MANAGER.
+--->
+SELECT COUNT(*)
+FROM EMP
+WHERE MGR = (SELECT MGR
+             FROM EMP
+             WHERE ENAME='FORD'
+             );
+
+             
