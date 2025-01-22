@@ -1,0 +1,146 @@
+
+*******************************************************************  NESTED SUBQUERY  **********************************************************************
+- A subquery written inside another subquery is known as nested subquery.
+- We can nest upto 255 subquery.
+
+************************************************************ ASSIGNMENT ON NESTED SUBQUERY *****************************************************************
+
+Q61) WAQTD SECOND MINIMUM SALARY.
+--->
+SELECT MAX(SAL)
+FROM EMP
+WHERE SAL < (SELECT MAX(SAL)
+             FROM EMP
+             );
+
+Q62) WAQTD FIFTH MAXIMUM SALARY.
+--->
+SELECT MAX(SAL)
+FROM EMP
+WHERE SAL < (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP
+                          WHERE SAL < (SELECT MAX(SAL)
+                                       FROM EMP
+                                       WHERE SAL < (SELECT MAX(SAL)
+                                                    FROM EMP
+                                                    )
+                                       )
+                          )
+              );
+
+Q63) WAQTD NAMES OF THE EMPLOYEES EARNING THIRD MAXIMUM SALARY.
+--->
+SELECT ENAME
+FROM EMP
+WHERE SAL = (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP
+                          WHERE SAL < (SELECT MAX(SAL)
+                                       FROM EMP
+                                      )
+                         )
+            );
+
+Q64) WAQTD EMPNO OF THE EMPLOYEES EARNING SECOND MAXIMUM SALARY.
+--->
+SELECT EMPNO
+FROM EMP
+WHERE SAL = (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP
+                         )
+             );
+
+Q65) WAQTD DEPARTMENT NAME OF AN EMPLOYEE GETTING FOURTH MAX SAL.
+--->
+SELECT DNAME
+FROM DEPT
+WHERE DEPTNO IN (SELECT DEPTNO
+                 FROM EMP
+                 WHERE SAL = (SELECT MAX(SAL)
+                              FROM EMP
+                              WHERE SAL < (SELECT MAX(SAL)
+                                           FROM EMP
+                                          )
+                             )
+                );
+
+Q66) WAQTD DETAILS OF THE EMPLOYEE WHO WAS HIRED SECOND (SECOND HIRED EMPLOYEE).
+--->
+SELECT *
+FROM EMP
+WHERE HIREDATE = (SELECT MIN(HIREDATE)
+                  FROM EMP
+                  WHERE HIREDATE > (SELECT MIN(HIREDATE)
+                                    FROM EMP
+                                   )
+                 );
+
+Q67) WAQTD NAME OF THE EMPLOYEE HIRED BEFORE THE LAST EMPLOYEE (SECOND LAST).
+--->
+SELECT ENAME
+FROM EMP
+WHERE HIREDATE = (SELECT MAX(HIREDATE)
+                  FROM EMP
+                  WHERE HIREDATE < (SELECT MAX(HIREDATE)
+                                    FROM EMP
+                                    )
+                  );
+
+Q68) WAQTD LOC OF THE EMPLOYEE WHO WAS HIRED FIRST.
+--->
+SELECT LOC
+FROM DEPT
+WHERE DEPTNO IN (SELECT DEPTNO
+                 FROM EMP
+                 WHERE HIREDATE = (SELECT MIN(HIREDATE)
+                                   FROM EMP
+                                  )
+                 );
+
+Q69) WAQTD DETAILS OF THE EMPLOYEES EARNING SEVENTH MINIMUM SALARY.
+--->
+SELECT *
+FROM EMP
+WHERE SAL = (SELECT MIN(SAL)
+             FROM EMP
+             WHERE SAL > (SELECT MIN(SAL)
+                          FROM EMP
+                          WHERE SAL > (SELECT MIN(SAL)
+                                       FROM EMP
+                                       WHERE SAL > (SELECT MIN(SAL)
+                                                    FROM EMP
+                                                    WHERE SAL > (SELECT MIN(SAL)
+                                                                 FROM EMP
+                                                                 WHERE SAL > (SELECT MIN(SAL)
+                                                                              FROM EMP
+                                                                              WHERE SAL > (SELECT MIN(SAL)
+                                                                                           FROM EMP
+                                                                                           )
+                                                                              )
+                                                                  )
+                                                    )
+                                      )
+                         )
+             );
+
+
+Q70) WAQTD DNAME OF EMPLOYEE GETTING SECOND MAXIMUM SALARY.
+--->
+SELECT DNAME
+FROM DEPT
+WHERE DEPTNO IN (SELECT DEPTNO
+                 FROM EMP
+                 WHERE SAL = (SELECT MAX(SAL)
+                              FROM EMP
+                              WHERE SAL < (SELECT MAX(SAL)
+                                           FROM EMP
+                                          )
+                             )
+                );
+
+
